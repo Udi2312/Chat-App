@@ -7,5 +7,7 @@ router.post("/signup" , Signup)
 router.post("/login" , Login)
 router.post("/logout" , Logout)
 
+// router.put("/update-profile" , protectRoute, updateProfile)
+
 
 export default router;
