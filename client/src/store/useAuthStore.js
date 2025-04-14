@@ -2,7 +2,7 @@ import {create} from 'zustand';
 import { axiosInstance } from '../lib/axios.js';
 // import axios from 'axios';
 import toast from 'react-hot-toast';
-
+// import { updateProfile } from '../../../server/src/controllers/auth.controller.js';
 export const useAuthStore = create((set) => ({
     authUser: null,
     isSigningUp: false,
@@ -31,9 +31,23 @@ export const useAuthStore = create((set) => ({
             set({ authUser: res.data });
             toast.success("Account created successfully!");
         } catch (error) {
-           toast.error(error.message);            
+           toast.error(error.response.data.message);            
         } finally {
             set({ isSigningUp: false });
+        }
+    },
+
+    login: async (data) =>{
+        set({ isLoggingIn: true });
+        try {
+            const res = await axiosInstance.post('/auth/login', data);
+            set({ authUser: res.data });
+            toast.success("Logged in successfully!");
+        } catch (error) {
+            console.log("Error in login:", error.message);
+            toast.error(error.response.data.message);
+        } finally {
+            set({ isLoggingIn: false });
         }
     },
 
@@ -45,6 +59,20 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             console.log("Error in logout:", error.message);
             toast.error(error.response.data.message);
+        }
+    },
+
+    updateProfile: async (data) => {
+        set({ isUpdatingProfile: true });
+        try {
+            const res = await axiosInstance.put('/auth/update-profile', data);
+            set({ authUser: res.data });
+            toast.success("Profile updated successfully!");
+        } catch (error) {
+            console.log("Error in updateProfile:", error.message);
+            toast.error(error.response.data.message);
+        } finally {
+            set({ isUpdatingProfile: false });
         }
     }
 }))

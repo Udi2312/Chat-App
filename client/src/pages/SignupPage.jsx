@@ -37,7 +37,7 @@ const SignupPage = () => {
     <div className='min-h-screen grid lg:grid-cols-2'>
        { /* Left Side */}
        <div className='flex flex-col justify-content items-center p-6 sm:p-12'>
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-8 m-15 ">
             {/* Logo */}
             <div className="text-center mb-8">
                 <div className="flex flex-col items-center gap-2 group">
