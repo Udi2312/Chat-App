@@ -9,6 +9,7 @@ export const useAuthStore = create((set) => ({
     isLoggingIn: false,
     isUpdatingProfile: false,
     isCheckingAuth: true,
+    onlineUsers: [],
 
     checkAuth: async () => {
         try {
@@ -31,7 +32,7 @@ export const useAuthStore = create((set) => ({
             set({ authUser: res.data });
             toast.success("Account created successfully!");
         } catch (error) {
-           toast.error(error.response.data.message);            
+           toast.error(error.message);            
         } finally {
             set({ isSigningUp: false });
         }
@@ -45,7 +46,7 @@ export const useAuthStore = create((set) => ({
             toast.success("Logged in successfully!");
         } catch (error) {
             console.log("Error in login:", error.message);
-            toast.error(error.response.data.message);
+            toast.error(error.message);
         } finally {
             set({ isLoggingIn: false });
         }
