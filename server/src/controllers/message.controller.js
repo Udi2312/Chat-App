@@ -43,8 +43,8 @@ export const sendMessage = async(req,res) =>{
         }
 
         const newMessage = new Message({
-            senderID: senderId,
-            receiverID: receiverId,        
+            senderId: senderId,
+            receiverId: receiverId,        
             text,
             image: imageUrl,
         });
